@@ -202,6 +202,39 @@
         transition: none;
       }
     }
+    .photo-frame {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: fit-content;
+  max-width: min(58.1vw, 900px);
+}
+
+.photo-frame .hero-photo {
+  display: block;
+}
+
+.photo-caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-top: 8px;
+  font-size: 16px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .photo-frame {
+    max-width: 88vw;
+  }
+
+  .photo-caption {
+    font-size: 14px;
+    gap: 8px;
+  }
+}
   </style>
 </head>
 
@@ -237,8 +270,17 @@
     </header>
 
     <main class="hero" id="hero" role="button" tabindex="0"
-          aria-label="Show next photograph">
-      <img id="hero-photo" src="photos/photo-01.jpg" alt="">
+      aria-label="Show next photograph">
+
+      <div class="photo-frame">
+        <img id="hero-photo" src="photos/photo-01.jpg" alt="">
+
+        <div class="photo-caption">
+          <span id="photo-location"></span>
+          <span id="photo-date"></span>
+        </div>
+      </div>
+
     </main>
 
     <footer class="site-footer">
@@ -281,55 +323,79 @@
       }
     });
 
-    // EXISTING SLIDESHOW
-    const photos = [
-      "photos/photo-01.jpg",
-      "photos/photo-02.JPG",
-      "photos/photo-03.JPG",
-      "photos/photo-04.jpg",
-      "photos/photo-05.JPG",
-      "photos/photo-06.JPG",
-      "photos/photo-07.jpg",
-    ];
+    
+// EXISTING SLIDESHOW
+const photos = [
+  "photos/photo-01.jpg",
+  "photos/photo-02.JPG",
+  "photos/photo-03.JPG",
+  "photos/photo-04.jpg",
+  "photos/photo-05.JPG",
+  "photos/photo-06.JPG",
+  "photos/photo-07.jpg",
+];
 
-    const hero = document.getElementById("hero");
-    const image = document.getElementById("hero-photo");
-    let current = 0;
-    let changing = false;
+const photoDetails = [
+  { location: "Puerto Escondido, Oaxaca, MX", date: "May 2026" },
+  { location: "Puerto Escondido, Oaxaca, MX", date: "May 2026" },
+  { location: "Puerto Escondido, Oaxaca, MX", date: "May 2026" },
+  { location: "Boracay, Aklan, PH", date: "June 2025" },
+  { location: "Osaka, Osaka-fu, JP", date: "July 2025" },
+  { location: "Osaka, Osaka-fu, JP", date: "July 2025" },
+  { location: "Boracay, Aklan, PH", date: "June 2025" },
+];
 
-    function showNextPhoto() {
-      if (changing || photos.length < 2) return;
+const hero = document.getElementById("hero");
+const image = document.getElementById("hero-photo");
+const locationCaption = document.getElementById("photo-location");
+const dateCaption = document.getElementById("photo-date");
 
-      changing = true;
-      const next = (current + 1) % photos.length;
-      const preload = new Image();
+let current = 0;
+let changing = false;
 
-      preload.onload = () => {
-        image.classList.add("is-changing");
+function updateCaption(index) {
+  locationCaption.textContent = photoDetails[index].location;
+  dateCaption.textContent = photoDetails[index].date;
+}
 
-        window.setTimeout(() => {
-          image.src = photos[next];
-          current = next;
-          image.classList.remove("is-changing");
-          changing = false;
-        }, 280);
-      };
+// Display the first photo's caption
+updateCaption(current);
 
-      preload.onerror = () => {
-        changing = false;
-      };
+function showNextPhoto() {
+  if (changing || photos.length < 2) return;
 
-      preload.src = photos[next];
-    }
+  changing = true;
+  const next = (current + 1) % photos.length;
+  const preload = new Image();
 
-    hero.addEventListener("click", showNextPhoto);
+  preload.onload = () => {
+    image.classList.add("is-changing");
 
-    hero.addEventListener("keydown", (event) => {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        showNextPhoto();
-      }
-    });
+    window.setTimeout(() => {
+      image.src = photos[next];
+      current = next;
+      updateCaption(current);
+      image.classList.remove("is-changing");
+      changing = false;
+    }, 280);
+  };
+
+  preload.onerror = () => {
+    changing = false;
+  };
+
+  preload.src = photos[next];
+}
+
+hero.addEventListener("click", showNextPhoto);
+
+hero.addEventListener("keydown", (event) => {
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault();
+    showNextPhoto();
+  }
+});
+
   </script>
 
 </body>
