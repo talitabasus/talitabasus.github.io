@@ -163,7 +163,7 @@
     .photo-frame img.is-changing {
       opacity: 0;
     }
-
+/*
     .photo-caption {
       display: flex;
       justify-content: space-between;
@@ -185,7 +185,7 @@
       text-align: right;
       flex-shrink: 0;
     }
-
+*/
     .site-footer {
       border-top: 1px solid #e5e5e5;
       display: flex;
@@ -281,13 +281,13 @@
 
       <div class="photo-frame">
         <img id="hero-photo" src="photos/photo-01.jpg" alt="">
-
+<!--
         <div class="photo-caption">
           <span id="photo-location"></span>
           <span id="photo-date"></span>
         </div>
       </div>
-
+-->
     </main>
 
     <footer class="site-footer">
@@ -340,7 +340,7 @@
       "photos/photo-06.JPG",
       "photos/photo-07.jpg"
     ];
-
+/*
     // LOCATION AND DATE FOR EACH PHOTO
     const photoDetails = [
       { location: "Puerto Escondido, Oaxaca, MX", date: "May 2026" },
@@ -367,7 +367,7 @@
 
     // INITIAL CAPTION
     updateCaption(current);
-
+*/
     // NEXT PHOTO
     function showNextPhoto() {
       if (changing || photos.length < 2) return;
@@ -382,7 +382,7 @@
         window.setTimeout(() => {
           image.src = photos[next];
           current = next;
-          updateCaption(current);
+     /*     updateCaption(current);     */
           image.classList.remove("is-changing");
           changing = false;
         }, 280);
