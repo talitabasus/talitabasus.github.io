@@ -1,1 +1,0 @@
-Put your photos in this folder and name them photo-01.jpg, photo-02.jpg, photo-03.jpg, etc. See README.txt.
