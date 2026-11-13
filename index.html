@@ -154,7 +154,7 @@
       max-height: 70vh;
       object-fit: contain;
       opacity: 1;
-      transition: opacity 280ms ease;
+      transition: none;
       pointer-events: none;
     }
 
@@ -317,24 +317,9 @@
 
     // NEXT PHOTO
     function showNextPhoto() {
-      if (changing || photos.length < 2) return;
-
-      changing = true;
-
-      const next = (current + 1) % photos.length;
-      const preload = new Image();
-
-      preload.onload = () => {
-        image.classList.add("is-changing");
-
-        window.setTimeout(() => {
-          image.src = photos[next];
-          current = next;
-
-          image.classList.remove("is-changing");
-          changing = false;
-        }, 280);
-      };
+  current = (current + 1) % photos.length;
+  image.src = photos[current];
+    };
 
       preload.onerror = () => {
         changing = false;
