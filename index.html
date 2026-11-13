@@ -261,49 +261,49 @@ x
   </div>
 
   <script>
-    // PASSWORD
-    const PASSWORD = "littlestar";
+    
+// PASSWORD
+const PASSWORD = "zebrashark";
 
-    const loginScreen = document.getElementById("login-screen");
-    const loginForm = document.getElementById("login-form");
-    const passwordInput = document.getElementById("password-input");
-    const loginError = document.getElementById("login-error");
-    const portfolio = document.getElementById("portfolio");
+const loginScreen = document.getElementById("login-screen");
+const loginForm = document.getElementById("login-form");
+const passwordInput = document.getElementById("password-input");
+const loginError = document.getElementById("login-error");
+const portfolio = document.getElementById("portfolio");
 
-    function unlockPortfolio() {
-      loginScreen.hidden = true;
-      portfolio.hidden = false;
-      sessionStorage.setItem("portfolioAccess", "granted");
-    }
+function unlockPortfolio() {
+  loginScreen.hidden = true;
+  portfolio.hidden = false;
+  sessionStorage.setItem("portfolioAccess", "granted");
+}
 
-    if (sessionStorage.getItem("portfolioAccess") === "granted") {
-      unlockPortfolio();
-    }
+if (sessionStorage.getItem("portfolioAccess") === "granted") {
+  unlockPortfolio();
+}
 
-    loginForm.addEventListener("submit", (event) => {
-      event.preventDefault();
+loginForm.addEventListener("submit", (event) => {
+  event.preventDefault();
 
-      if (passwordInput.value === PASSWORD) {
-        loginError.textContent = "";
-        unlockPortfolio();
-      } else {
-        loginError.textContent = "Incorrect password. Please try again.";
-        passwordInput.value = "";
-        passwordInput.focus();
-      }
-    });
+  if (passwordInput.value === PASSWORD) {
+    loginError.textContent = "";
+    unlockPortfolio();
+  } else {
+    loginError.textContent = "Incorrect password. Please try again.";
+    passwordInput.value = "";
+    passwordInput.focus();
+  }
+});
 
-    // SLIDESHOW
-    // SLIDESHOW
-    const photos = [
-      "photos/photo-01.jpg",
-      "photos/photo-02.JPG",
-      "photos/photo-03.JPG",
-      "photos/photo-04.jpg",
-      "photos/photo-05.JPG",
-      "photos/photo-06.JPG",
-      "photos/photo-07.jpg"
-    ];
+// SLIDESHOW
+const photos = [
+  "photos/photo-01.jpg",
+  "photos/photo-02.JPG",
+  "photos/photo-03.JPG",
+  "photos/photo-04.jpg",
+  "photos/photo-05.JPG",
+  "photos/photo-06.JPG",
+  "photos/photo-07.jpg"
+];
 
 const hero = document.getElementById("hero");
 const image = document.getElementById("hero-photo");
@@ -315,8 +315,10 @@ function showNextPhoto() {
   image.src = photos[current];
 }
 
+// CLICK TO CHANGE PHOTO
 hero.addEventListener("click", showNextPhoto);
 
+// KEYBOARD SUPPORT
 hero.addEventListener("keydown", (event) => {
   if (event.key === "Enter" || event.key === " ") {
     event.preventDefault();
@@ -324,37 +326,6 @@ hero.addEventListener("keydown", (event) => {
   }
 });
 
-    // SLIDESHOW ELEMENTS
-    const hero = document.getElementById("hero");
-    const image = document.getElementById("hero-photo");
-
-    let current = 0;
-    let changing = false;
-
-    // NEXT PHOTO
-    function showNextPhoto() {
-  current = (current + 1) % photos.length;
-  image.src = photos[current];
-    };
-
-      preload.onerror = () => {
-        changing = false;
-        console.error("Could not load photo:", photos[next]);
-      };
-
-      preload.src = photos[next];
-    }
-
-    // CLICK TO CHANGE PHOTO
-    hero.addEventListener("click", showNextPhoto);
-
-    // KEYBOARD SUPPORT
-    hero.addEventListener("keydown", (event) => {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        showNextPhoto();
-      }
-    });
 
   </script>
 
