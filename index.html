@@ -1,4 +1,4 @@
-
+x
 <!doctype html>
 <html lang="en">
 <head>
@@ -298,6 +298,7 @@
     });
 
     // SLIDESHOW
+    // SLIDESHOW
     const photos = [
       "photos/photo-01.jpg",
       "photos/photo-02.JPG",
@@ -307,6 +308,25 @@
       "photos/photo-06.JPG",
       "photos/photo-07.jpg"
     ];
+
+const hero = document.getElementById("hero");
+const image = document.getElementById("hero-photo");
+
+let current = 0;
+
+function showNextPhoto() {
+  current = (current + 1) % photos.length;
+  image.src = photos[current];
+}
+
+hero.addEventListener("click", showNextPhoto);
+
+hero.addEventListener("keydown", (event) => {
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault();
+    showNextPhoto();
+  }
+});
 
     // SLIDESHOW ELEMENTS
     const hero = document.getElementById("hero");
