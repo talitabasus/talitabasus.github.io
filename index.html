@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -8,27 +9,121 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500&display=swap" rel="stylesheet">
+
   <style>
     * { box-sizing: border-box; }
-    html, body { margin: 0; min-height: 100%; background: #fff; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: #fff;
+    }
+
     body {
       min-height: 100svh;
-      display: grid;
-      grid-template-rows: 8.2vh minmax(0, 1fr) 10vh;
       color: #111;
       font-family: "Outfit", sans-serif;
     }
+
+    /* PASSWORD SCREEN */
+    .login-screen {
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: #fff;
+    }
+
+    .login-content {
+      width: 100%;
+      max-width: 340px;
+      text-align: center;
+    }
+
+    .login-content h1 {
+      margin: 0 0 12px;
+      font-size: 24px;
+      font-weight: 400;
+    }
+
+    .login-content p {
+      margin: 0 0 28px;
+      color: #666;
+      font-size: 15px;
+      font-weight: 400;
+    }
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .login-form input {
+      width: 100%;
+      height: 46px;
+      padding: 0 14px;
+      border: 1px solid #dedede;
+      border-radius: 0;
+      background: #fff;
+      color: #111;
+      font-family: inherit;
+      font-size: 15px;
+      outline: none;
+    }
+
+    .login-form input:focus {
+      border-color: #777;
+    }
+
+    .login-form button {
+      height: 46px;
+      border: 1px solid #111;
+      border-radius: 0;
+      background: #111;
+      color: #fff;
+      font-family: inherit;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .login-form button:hover {
+      background: #333;
+    }
+
+    .login-error {
+      min-height: 18px;
+      margin-top: 14px;
+      color: #b33;
+      font-size: 13px;
+    }
+
+    .login-screen[hidden],
+    .portfolio[hidden] {
+      display: none;
+    }
+
+    /* EXISTING PORTFOLIO */
+    .portfolio {
+      min-height: 100svh;
+      display: grid;
+      grid-template-rows: 8.2vh minmax(0, 1fr) 10vh;
+    }
+
     .site-header {
       display: flex;
       justify-content: flex-end;
       align-items: flex-start;
       padding: 2.1vh 1.5vw 0;
     }
+
     .logo {
       display: block;
       width: clamp(112px, 15vw, 170px);
       height: auto;
     }
+
     .hero {
       min-height: 0;
       display: flex;
@@ -40,6 +135,7 @@
       user-select: none;
       outline: none;
     }
+
     .hero img {
       display: block;
       max-width: min(58.1vw, 900px);
@@ -51,7 +147,11 @@
       transition: opacity 280ms ease;
       pointer-events: none;
     }
-    .hero img.is-changing { opacity: 0; }
+
+    .hero img.is-changing {
+      opacity: 0;
+    }
+
     .site-footer {
       border-top: 1px solid #e5e5e5;
       display: flex;
@@ -62,36 +162,124 @@
       font-size: 16px;
       font-weight: 400;
     }
-    .site-footer a { color: #111; text-decoration: none; }
-    @media (max-width: 640px) {
-      body { grid-template-rows: 8vh minmax(0, 1fr) 9vh; }
-      .site-header { padding: 2vh 3vw 0; }
-      .logo { width: clamp(105px, 29vw, 145px); }
-      .hero { padding: 0 12px; }
-      .hero img { max-width: 88vw; max-height: 76vh; }
-      .site-footer { font-size: 15px; }
+
+    .site-footer a {
+      color: #111;
+      text-decoration: none;
     }
+
+    @media (max-width: 640px) {
+      .portfolio {
+        grid-template-rows: 8vh minmax(0, 1fr) 9vh;
+      }
+
+      .site-header {
+        padding: 2vh 3vw 0;
+      }
+
+      .logo {
+        width: clamp(105px, 29vw, 145px);
+      }
+
+      .hero {
+        padding: 0 12px;
+      }
+
+      .hero img {
+        max-width: 88vw;
+        max-height: 76vh;
+      }
+
+      .site-footer {
+        font-size: 15px;
+      }
+    }
+
     @media (prefers-reduced-motion: reduce) {
-      .hero img { transition: none; }
+      .hero img {
+        transition: none;
+      }
     }
   </style>
 </head>
+
 <body>
-  <header class="site-header">
-    <img class="logo" src="logo.png" alt="Talita Basus">
-  </header>
 
-  <main class="hero" id="hero" role="button" tabindex="0"
-        aria-label="Show next photograph">
-    <img id="hero-photo" src="photos/photo-01.jpg" alt="">
-  </main>
+  <!-- PASSWORD SCREEN -->
+  <section class="login-screen" id="login-screen">
+    <div class="login-content">
+      <h1>A little something to see.</h1>
+      <p>Enter the password to view the portfolio.</p>
 
-  <footer class="site-footer">
-    <a href="mailto:talitabasus@gmail.com">talitabasus@gmail.com</a>
-  </footer>
+      <form class="login-form" id="login-form">
+        <input
+          type="password"
+          id="password-input"
+          placeholder="Password"
+          aria-label="Password"
+          autocomplete="current-password"
+          required
+        >
+        <button type="submit">Enter</button>
+      </form>
+
+      <div class="login-error" id="login-error" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- EXISTING PORTFOLIO -->
+  <div class="portfolio" id="portfolio" hidden>
+
+    <header class="site-header">
+      <img class="logo" src="logo.png" alt="Talita Basus">
+    </header>
+
+    <main class="hero" id="hero" role="button" tabindex="0"
+          aria-label="Show next photograph">
+      <img id="hero-photo" src="photos/photo-01.jpg" alt="">
+    </main>
+
+    <footer class="site-footer">
+      <a href="mailto:talitabasus@gmail.com">talitabasus@gmail.com</a>
+    </footer>
+
+  </div>
 
   <script>
-    // Add each uploaded image filename here, in the order it should appear.
+    // CHANGE THIS to your own password.
+    const PASSWORD = "estrelinha";
+
+    // PASSWORD SCREEN
+    const loginScreen = document.getElementById("login-screen");
+    const loginForm = document.getElementById("login-form");
+    const passwordInput = document.getElementById("password-input");
+    const loginError = document.getElementById("login-error");
+    const portfolio = document.getElementById("portfolio");
+
+    function unlockPortfolio() {
+      loginScreen.hidden = true;
+      portfolio.hidden = false;
+      sessionStorage.setItem("portfolioAccess", "granted");
+    }
+
+    if (sessionStorage.getItem("portfolioAccess") === "granted") {
+      unlockPortfolio();
+    }
+
+    loginForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      if (passwordInput.value === PASSWORD) {
+        loginError.textContent = "";
+        unlockPortfolio();
+      } else {
+        loginError.textContent = "Incorrect password. Please try again.";
+        passwordInput.value = "";
+        passwordInput.focus();
+      }
+    });
+
+    // EXISTING SLIDESHOW
     const photos = [
       "photos/photo-01.jpg",
       "photos/photo-02.JPG",
@@ -109,24 +297,31 @@
 
     function showNextPhoto() {
       if (changing || photos.length < 2) return;
+
       changing = true;
       const next = (current + 1) % photos.length;
       const preload = new Image();
 
       preload.onload = () => {
         image.classList.add("is-changing");
+
         window.setTimeout(() => {
           image.src = photos[next];
           current = next;
           image.classList.remove("is-changing");
           changing = false;
-      }, 280);
+        }, 280);
       };
-      preload.onerror = () => { changing = false; };
+
+      preload.onerror = () => {
+        changing = false;
+      };
+
       preload.src = photos[next];
     }
 
     hero.addEventListener("click", showNextPhoto);
+
     hero.addEventListener("keydown", (event) => {
       if (event.key === "Enter" || event.key === " ") {
         event.preventDefault();
@@ -134,5 +329,6 @@
       }
     });
   </script>
+
 </body>
 </html>
