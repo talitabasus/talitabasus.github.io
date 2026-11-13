@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#ffffff">
   <title>Talita Basus</title>
+
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="apple-touch-icon" href="/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,7 +14,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     html, body {
       margin: 0;
@@ -53,7 +56,6 @@
       margin: 0 0 28px;
       color: #666;
       font-size: 15px;
-      font-weight: 400;
     }
 
     .login-form {
@@ -106,7 +108,7 @@
       display: none;
     }
 
-    /* EXISTING PORTFOLIO */
+    /* PORTFOLIO */
     .portfolio {
       min-height: 100svh;
       display: grid;
@@ -131,27 +133,57 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 0 18px 0;
+      padding: 0 18px;
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
       user-select: none;
       outline: none;
     }
 
-    .hero img {
-      display: block;
+    /* PHOTO AND CAPTIONS */
+    .photo-frame {
+      display: flex;
+      flex-direction: column;
+      width: fit-content;
       max-width: min(58.1vw, 900px);
-      max-height: 73.5vh;
+    }
+
+    .photo-frame img {
+      display: block;
       width: auto;
       height: auto;
+      max-width: 100%;
+      max-height: 70vh;
       object-fit: contain;
       opacity: 1;
       transition: opacity 280ms ease;
       pointer-events: none;
     }
 
-    .hero img.is-changing {
+    .photo-frame img.is-changing {
       opacity: 0;
+    }
+
+    .photo-caption {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      gap: 12px;
+      margin-top: 8px;
+      color: #111;
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.4;
+    }
+
+    #photo-location {
+      text-align: left;
+    }
+
+    #photo-date {
+      text-align: right;
+      flex-shrink: 0;
     }
 
     .site-footer {
@@ -160,7 +192,6 @@
       justify-content: center;
       align-items: center;
       padding: 12px;
-      font-family: "Outfit", sans-serif;
       font-size: 16px;
       font-weight: 400;
     }
@@ -187,9 +218,18 @@
         padding: 0 12px;
       }
 
-      .hero img {
+      .photo-frame {
         max-width: 88vw;
-        max-height: 76vh;
+      }
+
+      .photo-frame img {
+        max-height: 70vh;
+      }
+
+      .photo-caption {
+        font-size: 13px;
+        gap: 8px;
+        margin-top: 7px;
       }
 
       .site-footer {
@@ -198,43 +238,10 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .hero img {
+      .photo-frame img {
         transition: none;
       }
     }
-    .photo-frame {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  width: fit-content;
-  max-width: min(58.1vw, 900px);
-}
-
-.photo-frame .hero-photo {
-  display: block;
-}
-
-.photo-caption {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-  margin-top: 8px;
-  font-size: 16px;
-  font-weight: 400;
-  white-space: nowrap;
-}
-
-@media (max-width: 640px) {
-  .photo-frame {
-    max-width: 88vw;
-  }
-
-  .photo-caption {
-    font-size: 14px;
-    gap: 8px;
-  }
-}
   </style>
 </head>
 
@@ -262,7 +269,7 @@
     </div>
   </section>
 
-  <!-- EXISTING PORTFOLIO -->
+  <!-- PORTFOLIO -->
   <div class="portfolio" id="portfolio" hidden>
 
     <header class="site-header">
@@ -270,7 +277,7 @@
     </header>
 
     <main class="hero" id="hero" role="button" tabindex="0"
-      aria-label="Show next photograph">
+          aria-label="Show next photograph">
 
       <div class="photo-frame">
         <img id="hero-photo" src="photos/photo-01.jpg" alt="">
@@ -290,8 +297,8 @@
   </div>
 
   <script>
-    // CHANGE THIS to your own password.
-    const PASSWORD = "estrelinha";
+    // SET YOUR NEW PASSWORD HERE
+    const PASSWORD = "littlestar";
 
     // PASSWORD SCREEN
     const loginScreen = document.getElementById("login-screen");
@@ -323,79 +330,79 @@
       }
     });
 
-    
-// EXISTING SLIDESHOW
-const photos = [
-  "photos/photo-01.jpg",
-  "photos/photo-02.JPG",
-  "photos/photo-03.JPG",
-  "photos/photo-04.jpg",
-  "photos/photo-05.JPG",
-  "photos/photo-06.JPG",
-  "photos/photo-07.jpg",
-];
+    // SLIDESHOW PHOTOS
+    const photos = [
+      "photos/photo-01.jpg",
+      "photos/photo-02.JPG",
+      "photos/photo-03.JPG",
+      "photos/photo-04.jpg",
+      "photos/photo-05.JPG",
+      "photos/photo-06.JPG",
+      "photos/photo-07.jpg"
+    ];
 
-const photoDetails = [
-  { location: "Puerto Escondido, Oaxaca, MX", date: "May 2026" },
-  { location: "Puerto Escondido, Oaxaca, MX", date: "May 2026" },
-  { location: "Puerto Escondido, Oaxaca, MX", date: "May 2026" },
-  { location: "Boracay, Aklan, PH", date: "June 2025" },
-  { location: "Osaka, Osaka-fu, JP", date: "July 2025" },
-  { location: "Osaka, Osaka-fu, JP", date: "July 2025" },
-  { location: "Boracay, Aklan, PH", date: "June 2025" },
-];
+    // LOCATION AND DATE FOR EACH PHOTO
+    const photoDetails = [
+      { location: "Puerto Escondido, Oaxaca, MX", date: "May 2026" },
+      { location: "Puerto Escondido, Oaxaca, MX", date: "May 2026" },
+      { location: "Puerto Escondido, Oaxaca, MX", date: "May 2026" },
+      { location: "Boracay, Aklan, PH", date: "June 2025" },
+      { location: "Osaka, Osaka-fu, JP", date: "July 2025" },
+      { location: "Osaka, Osaka-fu, JP", date: "July 2025" },
+      { location: "Boracay, Aklan, PH", date: "June 2025" }
+    ];
 
-const hero = document.getElementById("hero");
-const image = document.getElementById("hero-photo");
-const locationCaption = document.getElementById("photo-location");
-const dateCaption = document.getElementById("photo-date");
+    const hero = document.getElementById("hero");
+    const image = document.getElementById("hero-photo");
+    const locationCaption = document.getElementById("photo-location");
+    const dateCaption = document.getElementById("photo-date");
 
-let current = 0;
-let changing = false;
+    let current = 0;
+    let changing = false;
 
-function updateCaption(index) {
-  locationCaption.textContent = photoDetails[index].location;
-  dateCaption.textContent = photoDetails[index].date;
-}
+    function updateCaption(index) {
+      locationCaption.textContent = photoDetails[index].location;
+      dateCaption.textContent = photoDetails[index].date;
+    }
 
-// Display the first photo's caption
-updateCaption(current);
+    // INITIAL CAPTION
+    updateCaption(current);
 
-function showNextPhoto() {
-  if (changing || photos.length < 2) return;
+    // NEXT PHOTO
+    function showNextPhoto() {
+      if (changing || photos.length < 2) return;
 
-  changing = true;
-  const next = (current + 1) % photos.length;
-  const preload = new Image();
+      changing = true;
+      const next = (current + 1) % photos.length;
+      const preload = new Image();
 
-  preload.onload = () => {
-    image.classList.add("is-changing");
+      preload.onload = () => {
+        image.classList.add("is-changing");
 
-    window.setTimeout(() => {
-      image.src = photos[next];
-      current = next;
-      updateCaption(current);
-      image.classList.remove("is-changing");
-      changing = false;
-    }, 280);
-  };
+        window.setTimeout(() => {
+          image.src = photos[next];
+          current = next;
+          updateCaption(current);
+          image.classList.remove("is-changing");
+          changing = false;
+        }, 280);
+      };
 
-  preload.onerror = () => {
-    changing = false;
-  };
+      preload.onerror = () => {
+        changing = false;
+      };
 
-  preload.src = photos[next];
-}
+      preload.src = photos[next];
+    }
 
-hero.addEventListener("click", showNextPhoto);
+    hero.addEventListener("click", showNextPhoto);
 
-hero.addEventListener("keydown", (event) => {
-  if (event.key === "Enter" || event.key === " ") {
-    event.preventDefault();
-    showNextPhoto();
-  }
-});
-
+    hero.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        showNextPhoto();
+      }
+    });
   </script>
 
 </body>
